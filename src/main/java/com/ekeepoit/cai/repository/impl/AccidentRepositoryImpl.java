@@ -50,11 +50,7 @@ public class AccidentRepositoryImpl implements AccidentRepositoryCustom {
 
     @Override
     public Collection<TopDangerousPointsDTO> findTopDangerousPoints(float radiusKm) {
-        GroupOperation groupOperation = group("start_location").first("start_location").as("start_location");
-        Aggregation aggregation = newAggregation(groupOperation).withOptions(newAggregationOptions().allowDiskUse(true).build());
-        AggregationResults<TopDangerousPoints> distinctCoordinates = mongoTemplate.aggregate(aggregation, "accident", TopDangerousPoints.class);
-
-        List<TopDangerousPointsDTO> dangerousPointsList = distinctCoordinates.getMappedResults().parallelStream().map(accident -> {
+        List<TopDangerousPointsDTO> dangerousPointsList = getListLimited().getMappedResults().parallelStream().map(accident -> {
             BasicQuery queryTotal = new BasicQuery("{start_location: { $geoWithin: { $centerSphere: [ [" + accident.getStartLocation().getX() + "," + accident.getStartLocation().getY() + "], " + Math.round(radiusKm / 6371) + "] }}})");
             return TopDangerousPointsDTO.factory(accident.getStartLocation().getX(), accident.getStartLocation().getY(), (int) mongoTemplate.count(queryTotal, TopDangerousPoints.class));
         }).collect(Collectors.toCollection(ArrayList::new));
@@ -62,6 +58,14 @@ public class AccidentRepositoryImpl implements AccidentRepositoryCustom {
         dangerousPointsList.sort(Comparator.comparing(TopDangerousPointsDTO::getTotal).reversed());
         dangerousPointsList = dangerousPointsList.subList(0, 10);
         return dangerousPointsList;
+    }
+
+    private AggregationResults<TopDangerousPoints> getListLimited() {
+        GroupOperation groupOperation = group("start_location").first("start_location").as("start_location");
+        LimitOperation limitOperation = limit(10000);
+        Aggregation aggregation = newAggregation(limitOperation, groupOperation).withOptions(newAggregationOptions().allowDiskUse(true).build());
+        AggregationResults<TopDangerousPoints> distinctCoordinates = mongoTemplate.aggregate(aggregation, "accident", TopDangerousPoints.class);
+        return distinctCoordinates;
     }
 
     @Override
