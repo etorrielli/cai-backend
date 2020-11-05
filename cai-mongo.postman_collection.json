@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "08751623-81f9-4cd6-ab0c-ec56bb46d3f7",
+		"name": "cai-mongo",
+		"description": "accidents",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "2-accidentTopStates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/api/accident/top-states",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"accident",
+						"top-states"
+					]
+				},
+				"description": "accidentByDates"
+			},
+			"response": []
+		},
+		{
+			"name": "5-accidentAvgDistance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/api/accident/avg-distance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"accident",
+						"avg-distance"
+					]
+				},
+				"description": "accidentByDates"
+			},
+			"response": []
+		},
+		{
+			"name": "3-accidentByRadius",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/api/accident/lng/-84.058723/lat/39.865147/radius/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"accident",
+						"lng",
+						"-84.058723",
+						"lat",
+						"39.865147",
+						"radius",
+						"1"
+					]
+				},
+				"description": "accidentByDates"
+			},
+			"response": []
+		},
+		{
+			"name": "4-topDangerousPoints",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/api/accident/top-dangerous-points/0.5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"accident",
+						"top-dangerous-points",
+						"0.5"
+					]
+				},
+				"description": "accidentByDates"
+			},
+			"response": []
+		},
+		{
+			"name": "1-accidentByDates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/api/accident/datefrom/2016-02-07/dateto/2016-02-09",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"accident",
+						"datefrom",
+						"2016-02-07",
+						"dateto",
+						"2016-02-09"
+					]
+				},
+				"description": "accidentByDates"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
