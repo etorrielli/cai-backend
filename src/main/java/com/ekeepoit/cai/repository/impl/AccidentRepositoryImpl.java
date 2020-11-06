@@ -56,7 +56,7 @@ public class AccidentRepositoryImpl implements AccidentRepositoryCustom {
         }).collect(Collectors.toCollection(ArrayList::new));
 
         dangerousPointsList.sort(Comparator.comparing(TopDangerousPointsDTO::getTotal).reversed());
-        dangerousPointsList = dangerousPointsList.subList(0, 10);
+        dangerousPointsList = dangerousPointsList.subList(0, 5);
         return dangerousPointsList;
     }
 
